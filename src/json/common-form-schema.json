@@ -1,0 +1,459 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "title": "活动名称",
+      "description": "活动名称描述",
+
+      "component": "input",
+      "field": {
+        "placeholder": "活动名称",
+        "type": "textarea",
+        "listeners": {}
+      },
+      "rules": [
+        {
+          "required": true,
+          "message": "活动名称不能为空",
+          "trigger": "change"
+        }
+      ],
+      "head": "head",
+      "tail": "tail"
+    },
+    "count": {
+      "title": "参加人数 title",
+
+      "component": "input",
+      "rules": [
+        {
+          "required": true,
+          "message": "参加人数不能为空",
+          "trigger": "change"
+        },
+        {
+          "min": 10,
+          "max": 100,
+          "type": "number"
+        }
+      ],
+      "field": {
+        "placeholder": "参加人数",
+        "type": "number"
+      }
+    },
+    "organizer": {
+      "title": "活动举办方",
+
+      "component": "autocomplete",
+      "rules": [
+        {
+          "required": true,
+          "message": "活动举办方不能为空"
+        }
+      ],
+      "field": {
+        "placeholder": "活动举办方"
+      }
+    },
+    "region": {
+      "title": "活动区域",
+
+      "component": "select",
+      "rules": [
+        {
+          "required": true,
+          "message": "请选择活动区域",
+          "trigger": "change"
+        }
+      ],
+      "field": {
+        "clearable": true,
+        "options": [
+          {
+            "value": "shanghai",
+            "label": "上海"
+          },
+          {
+            "value": "beijing",
+            "label": "北京"
+          }
+        ],
+        "placeholder": "活动区域"
+      }
+    },
+    "date": {
+      "title": "活动日期",
+
+      "component": "date-picker",
+      "rules": [
+        {
+          "required": true,
+          "message": "请选择活动日期"
+        }
+      ],
+      "field": {
+        "placeholder": "活动日期"
+      }
+    },
+    "delivery": {
+      "title": "即时配送",
+
+      "component": "switch",
+      "field": {}
+    },
+    "types": {
+      "title": "活动性质",
+
+      "component": "checkbox-group",
+      "field": {
+        "options": [
+          {
+            "value": 1,
+            "label": "美食/餐厅线上活动"
+          },
+          {
+            "value": 2,
+            "label": "地推活动"
+          },
+          {
+            "value": 3,
+            "label": "线下主题活动"
+          },
+          {
+            "value": 4,
+            "label": "单纯品牌曝光"
+          }
+        ]
+      }
+    },
+    "resource": {
+      "title": "特殊资源",
+
+      "component": "radio-group",
+      "rules": [
+        {
+          "required": true,
+          "message": "请选择资源类型"
+        }
+      ],
+      "field": {
+        "options": [
+          {
+            "value": 1,
+            "label": "线上品牌商赞助"
+          },
+          {
+            "value": 2,
+            "label": "线下场地免费"
+          }
+        ]
+      }
+    },
+    "desc": {
+      "title": "活动形式",
+
+      "component": "input",
+      "rules": [
+        {
+          "required": true,
+          "message": "活动形式不能为空"
+        }
+      ],
+      "field": {
+        "type": "textarea"
+      }
+    },
+    "link": {
+      "title": "链接示例",
+
+      "component": "link",
+      "field": {
+        "target": "_blank",
+        "text": "谷歌链接"
+      }
+    },
+    "plain_text": {
+      "title": "文本示例",
+
+      "component": "plain-text"
+    },
+    "image": {
+      "title": "上传图片",
+
+      "component": "upload",
+      "rules": [
+        {
+          "required": true,
+          "message": "请上传图片",
+          "trigger": ["change"]
+        }
+      ],
+      "field": {
+        "action": "",
+        "tip": "提示信息",
+        "drag": true,
+        "multiple": true
+      }
+    },
+    "color": {
+      "title": "颜色",
+
+      "component": "color-picker",
+      "rules": [
+        {
+          "required": true,
+          "message": "请选择颜色",
+          "trigger": ["change"]
+        }
+      ]
+    },
+    "hobby": {
+      "type": "array",
+      "title": "爱好",
+      "minItems": 2,
+      "maxItems": 6,
+      "items": {
+        "title": "爱好",
+        "default": "",
+
+        "component": "input",
+        "field": {
+          "placeholder": "请填写兴趣爱好"
+        },
+        "rules": [
+          {
+            "required": true
+          }
+        ]
+      },
+
+      "addable": true,
+      "orderable": true,
+      "removable": true,
+      "errors": [
+        {
+          "message": "自定义错误"
+        }
+      ]
+    },
+    "users": {
+      "type": "array",
+      "title": "用户信息列表",
+      "description": "请填写真实信息",
+      "items": [
+        {
+          "type": "object",
+          "default": {
+            "name": "new name",
+            "age": 20,
+            "family": {
+              "parent": {
+                "father": "father",
+                "mother": "mother"
+              },
+              "siblings": ["brother"]
+            },
+            "friends": ["friend 1"],
+            "hobby": ["hobby 1", "hobby 2"]
+          },
+          "properties": {
+            "name": {
+              "title": "用户名",
+
+              "component": "input",
+              "rules": [
+                {
+                  "required": true
+                }
+              ],
+              "field": {
+                "placeholder": "请输入用户名"
+              }
+            },
+            "age": {
+              "title": "年龄",
+
+              "component": "input",
+              "rules": [
+                {
+                  "type": "number",
+                  "required": true
+                }
+              ],
+              "field": {
+                "type": "number",
+                "placeholder": "请输入年龄"
+              }
+            },
+            "hobby": {
+              "type": "array",
+              "title": "爱好",
+              "items": [
+                {
+                  "title": "爱好1",
+
+                  "component": "input",
+                  "field": {
+                    "placeholder": "请填写兴趣爱好"
+                  },
+                  "rules": [
+                    {
+                      "required": true
+                    }
+                  ],
+                  "default": "",
+                  "id": 1
+                },
+                {
+                  "title": "爱好2",
+
+                  "component": "input",
+                  "field": {
+                    "placeholder": "请填写兴趣爱好"
+                  },
+                  "rules": [
+                    {
+                      "required": true
+                    }
+                  ],
+                  "default": "",
+                  "id": 2
+                }
+              ],
+              "additionalItems": {
+                "title": "爱好",
+
+                "component": "input",
+                "field": {
+                  "placeholder": "请填写兴趣爱好"
+                },
+                "rules": [
+                  {
+                    "required": true
+                  }
+                ],
+                "default": ""
+              },
+
+              "addable": true,
+              "removable": true
+            },
+            "family": {
+              "type": "object",
+              "title": "家庭",
+              "properties": {
+                "parent": {
+                  "type": "object",
+                  "title": "父母",
+                  "properties": {
+                    "father": {
+                      "title": "父亲名字",
+
+                      "component": "input",
+                      "rules": [
+                        {
+                          "required": true
+                        }
+                      ],
+                      "field": {
+                        "placeholder": "请填写父亲名字"
+                      }
+                    },
+                    "mother": {
+                      "title": "母亲名字",
+
+                      "component": "input",
+                      "rules": [
+                        {
+                          "required": true
+                        }
+                      ],
+                      "field": {
+                        "placeholder": "请填写母亲名字"
+                      }
+                    }
+                  }
+                },
+                "siblings": {
+                  "type": "array",
+                  "title": "兄弟姐妹",
+                  "items": {
+                    "title": "兄长",
+                    "default": "",
+
+                    "component": "input",
+                    "field": {
+                      "placeholder": "请填写兄长名字"
+                    }
+                  },
+
+                  "addable": true,
+                  "removable": true,
+                  "orderable": true
+                }
+              }
+            },
+            "friends": {
+              "type": "array",
+              "title": "朋友们",
+              "minItems": 2,
+              "maxItems": 6,
+              "items": [
+                {
+                  "title": "朋友",
+
+                  "component": "input",
+                  "rules": [
+                    {
+                      "required": true
+                    }
+                  ],
+                  "field": {
+                    "placeholder": "请填写朋友姓名",
+                    "listeners": {}
+                  }
+                }
+              ],
+              "additionalItems": {
+                "title": "新增的朋友",
+                "default": "",
+
+                "component": "input",
+                "rules": [
+                  {
+                    "required": true,
+                    "message": "新增的朋友是必填的"
+                  }
+                ],
+                "field": {
+                  "placeholder": "请填写新增的朋友"
+                }
+              },
+
+              "border": false,
+              "style": {
+                "margin-bottom": 0
+              },
+              "addable": true,
+              "orderable": true,
+              "removable": true
+            }
+          },
+
+          "order": ["hobby", "name", "嘿嘿嘿", "friends"]
+        }
+      ],
+
+      "addable": {
+        "text": "新增用户",
+        "type": "primary",
+        "style": {
+          "fontSize": "14px"
+        }
+      },
+      "removable": true,
+      "orderable": true
+    }
+  }
+}

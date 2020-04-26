@@ -1,0 +1,53 @@
+[
+  {
+    "title": "行标题",
+    "rowAttrs": {
+      "type": "flex",
+      "style": "flex-wrap: wrap;"
+    },
+    "col": [
+      {
+        "colAttrs": {
+          "span": 12
+        },
+        "fields": [
+          "name",
+          "region",
+          "organizer",
+          "date",
+          "delivery",
+          "type"
+        ],
+        "title": "列标题"
+      },
+      {
+        "colAttrs": {
+          "span": 12
+        },
+        "fields": [
+          "resource",
+          "desc"
+        ],
+        "title": "列标题"
+      }
+    ]
+  },
+  {
+    "title": "行标题2",
+    "rowAttrs": {
+      "type": "flex",
+      "style": "flex-wrap: wrap;"
+    },
+    "col": [
+      {
+        "colAttrs": {
+          "span": 18
+        },
+        "fields": [
+          "user"
+        ],
+        "title": "列标题"
+      }
+    ]
+  }
+]

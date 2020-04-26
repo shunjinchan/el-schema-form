@@ -1,0 +1,56 @@
+[
+  {
+    "rowAttrs": {
+      "type": "flex",
+      "style": "flex-wrap: wrap;",
+      "gutter": 40
+    },
+    "col": [
+      {
+        "colAttrs": {
+          "span": 12
+        },
+        "fields": [
+          "name",
+          "region",
+          "organizer",
+          "date",
+          "count",
+          "delivery",
+          "types"
+        ]
+      },
+      {
+        "colAttrs": {
+          "span": 12
+        },
+        "fields": [
+          "color",
+          "dynamic_component",
+          "dynamic_component2",
+          "link",
+          "plain_text",
+          "resource",
+          "desc",
+          "image"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "复杂例子",
+    "rowAttrs": {
+      "type": "flex",
+      "style": "flex-wrap: wrap;",
+      "gutter": 40
+    },
+    "col": [
+      {
+        "colAttrs": {
+          "span": 12
+        },
+        "fields": ["users"]
+      }
+    ]
+  }
+]

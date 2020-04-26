@@ -1,0 +1,185 @@
+<template>
+  <el-schema-form
+    :form-config="formConfig"
+    :model="model"
+    :form-item-list="formItemList"
+    @change="handleChange"
+  >
+    <el-form-item>
+      <el-button type="primary" @click="onSubmit">立即创建</el-button>
+      <el-button>取消</el-button>
+    </el-form-item>
+  </el-schema-form>
+</template>
+
+<script>
+import ElSchemaForm from '../../package/Form.vue'
+
+export default {
+  components: {
+    ElSchemaForm
+  },
+
+  data () {
+    return {
+      model: {
+        name: '',
+        region: '',
+        date: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: '',
+        link: '//google.com',
+        text: '动态表单'
+      }
+    }
+  },
+
+  computed: {
+    formConfig () {
+      return {
+        labelWidth: '80px',
+        inline: false,
+        labelPosition: 'left'
+      }
+    },
+
+    formItemList () {
+      const list = [
+        {
+          prop: 'name',
+          type: 'input',
+          label: '活动名称',
+          rules: [
+            { required: true, message: '活动名称不能为空', trigger: 'blur' },
+            { type: 'number', message: '年龄必须为数字值' }
+          ],
+          field: {
+            placeholder: '活动名称'
+          }
+        },
+        {
+          prop: 'region',
+          type: 'select',
+          label: '活动区域',
+          rules: [
+            { required: true, message: '请选择活动区域', trigger: 'change' }
+          ],
+          field: {
+            clearable: true,
+            options: [
+              {
+                value: 'shanghai',
+                label: '上海'
+              },
+              {
+                value: 'beijing',
+                label: '北京'
+              }
+            ],
+            placeholder: '活动区域'
+          }
+        },
+        {
+          prop: 'date',
+          type: 'date-picker',
+          label: '活动日期',
+          rules: [
+            { required: true, message: '请选择活动日期', trigger: 'change' }
+          ],
+          field: {
+            placeholder: '活动日期'
+          }
+        },
+        {
+          prop: 'delivery',
+          type: 'switch',
+          label: '即时配送',
+          field: {}
+        },
+        {
+          prop: 'type',
+          type: 'checkbox-group',
+          label: '活动性质',
+          rules: [
+            { required: true, message: '请选择活动性质', trigger: 'change' }
+          ],
+          field: {
+            options: [
+              {
+                value: '美食/餐厅线上活动',
+                label: '美食/餐厅线上活动'
+              },
+              {
+                value: '地推活动',
+                label: '地推活动'
+              },
+              {
+                value: '线下主题活动',
+                label: '线下主题活动'
+              },
+              {
+                value: '单纯品牌曝光',
+                label: '单纯品牌曝光'
+              }
+            ]
+          }
+        },
+        {
+          prop: 'resource',
+          type: 'radio-group',
+          label: '特殊资源',
+          rules: [
+            { required: true, message: '请选择资源类型', trigger: 'change' }
+          ],
+          field: {
+            options: [
+              {
+                value: '线上品牌商赞助',
+                label: '线上品牌商赞助'
+              },
+              {
+                value: '线下场地免费',
+                label: '线下场地免费'
+              }
+            ]
+          }
+        },
+        {
+          prop: 'desc',
+          type: 'input',
+          subtype: 'textarea',
+          label: '活动形式',
+          rules: [
+            { required: true, message: '活动形式不能为空', trigger: 'blur' }
+          ],
+          field: {}
+        },
+        {
+          prop: 'link',
+          type: 'link',
+          label: '链接',
+          field: {
+            target: '_blank',
+            text: '谷歌链接'
+          }
+        },
+        {
+          prop: 'text',
+          type: 'plain-text',
+          label: '文本示例'
+        }
+      ]
+
+      return list
+    }
+  },
+
+  methods: {
+    handleChange () {},
+
+    onSubmit () {}
+  }
+}
+</script>

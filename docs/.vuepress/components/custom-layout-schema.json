@@ -1,0 +1,220 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "title": "活动名称",
+      "description": "活动名称描述",
+
+      "component": "input",
+      "field": {
+        "placeholder": "活动名称",
+        "type": "textarea",
+        "listeners": {}
+      },
+      "rules": [
+        {
+          "required": true,
+          "message": "活动名称不能为空",
+          "trigger": "change"
+        }
+      ]
+    },
+    "region": {
+      "title": "活动区域",
+
+      "component": "select",
+      "rules": [
+        {
+          "required": true,
+          "message": "请选择活动区域",
+          "trigger": "change"
+        }
+      ],
+      "field": {
+        "clearable": true,
+        "options": [
+          {
+            "value": "shanghai",
+            "label": "上海"
+          },
+          {
+            "value": "beijing",
+            "label": "北京"
+          }
+        ],
+        "placeholder": "活动区域"
+      }
+    },
+    "date": {
+      "title": "活动日期",
+
+      "component": "date-picker",
+      "rules": [
+        {
+          "required": true,
+          "message": "请选择活动日期"
+        }
+      ],
+      "field": {
+        "placeholder": "活动日期"
+      }
+    },
+    "delivery": {
+      "title": "即时配送",
+
+      "component": "switch",
+      "field": {}
+    },
+    "type": {
+      "title": "活动性质",
+
+      "component": "checkbox-group",
+      "field": {
+        "options": [
+          {
+            "value": 1,
+            "label": "美食/餐厅线上活动"
+          },
+          {
+            "value": 2,
+            "label": "地推活动"
+          },
+          {
+            "value": 3,
+            "label": "线下主题活动"
+          },
+          {
+            "value": 4,
+            "label": "单纯品牌曝光"
+          }
+        ]
+      }
+    },
+    "resource": {
+      "title": "特殊资源",
+
+      "component": "radio-group",
+      "rules": [
+        {
+          "required": true,
+          "message": "请选择资源类型"
+        }
+      ],
+      "field": {
+        "options": [
+          {
+            "value": 1,
+            "label": "线上品牌商赞助"
+          },
+          {
+            "value": 2,
+            "label": "线下场地免费"
+          }
+        ]
+      }
+    },
+    "desc": {
+      "title": "活动形式",
+
+      "component": "input",
+      "rules": [
+        {
+          "required": true,
+          "message": "活动形式不能为空"
+        }
+      ],
+      "field": {
+        "type": "textarea"
+      }
+    },
+    "user": {
+      "type": "array",
+      "title": "用户",
+      "minItems": 3,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "title": "定制标题",
+        "default": {
+          "name": "",
+          "age": "",
+          "gender": ""
+        },
+        "properties": {
+          "name": {
+            "title": "姓名",
+            "description": "姓名描述",
+            "type": "string",
+
+            "component": "input",
+            "field": {
+              "placeholder": "姓名",
+              "type": "textarea",
+              "listeners": {}
+            },
+            "rules": [
+              {
+                "required": true,
+                "message": "姓名不能为空",
+                "trigger": "change"
+              }
+            ]
+          },
+          "age": {
+            "title": "年龄",
+            "type": "number",
+
+            "component": "input",
+            "rules": [
+              {
+                "required": true,
+                "message": "请输入年龄"
+              }
+            ],
+            "field": {
+              "placeholder": "年龄不能为空",
+              "type": "number"
+            }
+          },
+          "gender": {
+            "title": "性别",
+            "type": "string",
+
+            "component": "select",
+            "rules": [
+              {
+                "required": true,
+                "message": "请选择性别",
+                "trigger": "change"
+              }
+            ],
+            "field": {
+              "clearable": true,
+              "options": [
+                {
+                  "value": "male",
+                  "label": "男"
+                },
+                {
+                  "value": "female",
+                  "label": "女"
+                },
+                {
+                  "value": "others",
+                  "label": "其它"
+                }
+              ]
+            }
+          }
+        },
+
+        "border": false
+      },
+      
+
+      "addable": true,
+      "orderable": true,
+      "removable": true
+    }
+  }
+}

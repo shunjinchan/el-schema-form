@@ -1,0 +1,94 @@
+{
+  "type": "object",
+  "properties": {
+    "user": {
+      "type": "array",
+      "title": "用户",
+      "minItems": 3,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "title": "定制标题",
+        "default": {
+          "name": "",
+          "age": "",
+          "gender": ""
+        },
+        "properties": {
+          "name": {
+            "title": "姓名",
+            "description": "姓名描述",
+            "type": "string",
+
+            "component": "input",
+            "field": {
+              "placeholder": "姓名",
+              "type": "textarea",
+              "listeners": {}
+            },
+            "rules": [
+              {
+                "required": true,
+                "message": "姓名不能为空",
+                "trigger": "change"
+              }
+            ]
+          },
+          "age": {
+            "title": "年龄",
+            "type": "number",
+
+            "component": "input",
+            "rules": [
+              {
+                "required": true,
+                "message": "请输入年龄"
+              }
+            ],
+            "field": {
+              "placeholder": "年龄不能为空",
+              "type": "number"
+            }
+          },
+          "gender": {
+            "title": "性别",
+            "type": "string",
+
+            "component": "select",
+            "rules": [
+              {
+                "required": true,
+                "message": "请选择性别",
+                "trigger": "change"
+              }
+            ],
+            "field": {
+              "clearable": true,
+              "options": [
+                {
+                  "value": "male",
+                  "label": "男"
+                },
+                {
+                  "value": "female",
+                  "label": "女"
+                },
+                {
+                  "value": "others",
+                  "label": "其它"
+                }
+              ]
+            }
+          }
+        },
+
+        "border": false
+      },
+      
+
+      "addable": true,
+      "orderable": true,
+      "removable": true
+    }
+  }
+}

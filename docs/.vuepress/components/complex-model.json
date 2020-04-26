@@ -1,0 +1,35 @@
+{
+  "name": "name",
+  "organizer": "organizer",
+  "count": 33,
+  "region": "shanghai",
+  "date": "",
+  "delivery": false,
+  "types": [1, 2],
+  "resource": "",
+  "desc": "",
+
+  "link": "//google.com",
+  "plain_text": "文本示例文案",
+  "dynamic_component": "",
+  "dynamic_component2": "",
+  "image": "",
+  "hobby": ["打篮球", "看动画片"],
+  "color": "#000000",
+
+  "users": [
+    {
+      "name": "user 1",
+      "age": 11,
+      "family": {
+        "parent": {
+          "father": "user 1 father",
+          "mother": "user 2 mother"
+        },
+        "siblings": [""]
+      },
+      "friends": ["1"],
+      "hobby": ["打篮球", "看动画片"]
+    }
+  ]
+}
