@@ -4,7 +4,6 @@
     :schema="schema"
     :model="model"
     :config="config"
-    :auto-update="true"
     @add="handleAddField"
     @remove="handleRemoveField"
     @move-up="handleMoveUp"

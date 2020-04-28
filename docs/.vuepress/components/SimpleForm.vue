@@ -3,7 +3,6 @@
     :schema="schema"
     :model="model"
     :config="config"
-    :auto-update="true"
     style="width: 460px;"
   ></el-schema-form>
 </template>

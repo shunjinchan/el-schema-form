@@ -5,7 +5,6 @@
     :model="model"
     :config="config"
     :layout="layout"
-    :auto-update="true"
     @add="handleAddField"
     @remove="handleRemoveField"
     @move-up="handleMoveUp"

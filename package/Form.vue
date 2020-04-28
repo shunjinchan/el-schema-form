@@ -136,14 +136,12 @@ export default {
     },
 
     /**
-     * 是否自动更新 model，默认为 false，因为无法判断 model 是普通属性、响应属性还是计算属性
-     * 所以交由使用者自己选择是否要自动更新
-     * autoUpdate 为 true 时，组件内部默认认为 model 是响应式属性，在内部直接更新 model。但是如果 model 是计算属性的话，就会出问题，更新控件的值是无法生效的，添加/删除/排序却有作用，因为在添加/删除/排序之后，组件内部会主动拿 model 去更新一次组件内部的 form schema，但是不更新源 schema
-     * 所以使用的时候要多注意这点
+     * 是否自动更新 model，默认为 true
+     * 当 model 是计算属性时，需要自己监听组件的 change 事件更新 model
      */
     autoUpdate: {
       type: Boolean,
-      default: false
+      default: true
     },
 
     submitButton: {

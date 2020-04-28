@@ -4,7 +4,6 @@
     :model="model"
     :config="config"
     :layout="layout"
-    :auto-update="true"
   ></el-schema-form>
 </template>
 

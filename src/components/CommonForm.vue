@@ -39,7 +39,6 @@
               :config="formConfig"
               :layout="layout"
               :schema="uiSchema"
-              :auto-update="true"
               :submit-button="true"
               :cancel-button="true"
               @add="handleAddField"
