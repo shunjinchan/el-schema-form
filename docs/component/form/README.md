@@ -21,7 +21,9 @@ El Schema Form 参数包括：
 | model      | 表单值                                      | Object  | -          | 是       | -      |
 | layout     | 表单布局，如果没有传 layout，则默认一行一列 | Array   | -          | 否       | -      |
 | config     | 表单配置                                    | Object  | -          | 否       | null   |
-| autoConfig | 是否自动更新 model                          | Boolean | true/false | 否       | false  |
+| autoUpdate | 是否自动更新 model                          | Boolean | true/false | 否       | true  |
+| submitButton | 提交按钮                          | Boolean/Object | - | 否       | false  |
+| cancelButton | 取消按钮                          | Boolean/Object | - | 否       | false  |
 
 
 ::: warning
@@ -30,11 +32,19 @@ El Schema Form 参数包括：
 model 与 layout 同理。
 :::
 
-### autoConfig
+### autoUpdate
 
 是否自动更新 model，交由使用者自己根据业务配置该属性。如果 model 是普通的响应式属性，自动更新 model 可以帮助使用者减少一部分工作。
 
-如果 model 的来源是计算属性或 vuex store，自动更新 model 是无法触发 UI 更新的。这种场景下，需要监听 change 事件自行更新 model。
+如果 model 的来源是计算属性，自动更新 model 是无法触发 UI 更新的。这种场景下，需要监听 change 事件自行更新 model。
+
+### 自定义 submitButton
+
+将 submitButton 配置为对象，其属性与 el-button 的保持一致。如果要定制按钮的文案，增加一个 submitButton.text 属性。
+
+### 自定义 cancelButton
+
+将 cancelButton 配置为对象，其属性与 el-button 的保持一致。如果要定制按钮的文案，增加一个 cancelButton.text 属性。
 
 
 ## Form Events
@@ -43,6 +53,8 @@ model 与 layout 同理。
 | --------------- | ------------------------ | ------------------------------------------------------- |
 | validate        | 同 el-form               | 同 el-form                                              |
 | change          | 任一表单项的值变化后触发 | 表单项 prop 值，表单项新值                              |
+| submit          | 点击 submit button 且表单校验通过时触发 | -                              |
+| cancel          | 点击 cancel button 时触发 | -                              |
 | add       | 添加控件（控件组）       | 当前控件（控件组）父级的 schema                         |
 | remove    | 删除控件（控件组）       | 当前控件（控件组）父级的 schema，当前控件（控件组）索引 |
 | move-up   | 往上移动控件（控件组）   | 当前控件（控件组）父级的 schema，当前控件（控件组）索引 |
@@ -69,7 +81,7 @@ model 与 layout 同理。
 
 model 的数据流向默认是单向的，即 el-form-schema 内部不可直接更新 model，只能通过监听事件的形式更新。
 
-不过，在调用组件传参时，autoConfig 为 true，在控件更新时允许组件内部更新 model。新增/删除/排序时一定得监听对应的事件更新 model。
+不过，在调用组件传参时，autoUpdate 为 true，在控件更新时允许组件内部更新 model。新增/删除/排序时一定得监听对应的事件更新 model。
 
 ### 示例
 
