@@ -3,6 +3,11 @@
     :schema="schema"
     :model="model"
     :config="config"
+    :submit-button="true"
+    :cancel-button="{
+      type: 'plain'
+    }"
+    @submit="handleSubmit"
     style="width: 460px;"
   ></el-schema-form>
 </template>
@@ -19,6 +24,12 @@ export default {
       config: {
         labelWidth: '100px'
       }
+    }
+  },
+
+  methods: {
+    handleSubmit () {
+      console.log('submit')
     }
   }
 }

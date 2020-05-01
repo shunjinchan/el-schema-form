@@ -8,4 +8,4 @@ Form Schema 是在 JSON Schema 基础下进行扩展的一种定义表单的规�
 
 表现形式上，Form Schema 仍然是 JSON。
 
-详见 [Schema](/schema/schema/)
+详见 [Schema](/schema/form-schema/)
