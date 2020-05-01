@@ -11,7 +11,7 @@
       :index="uniqueKey"
     ></form-item-head>
 
-    <template v-if="isFieldset">
+    <template v-if="isFieldset && visible">
       <form-fieldset
         :class="{ 'is-border': innerFieldsetSchema.border !== false }"
         :schema="innerFieldsetSchema"
@@ -79,7 +79,7 @@
     </template>
 
     <form-item-tool-bar
-      v-if="toolBarVisible"
+      v-if="visible && toolBarVisible"
       :is-fieldset="isFieldset"
       :index="uniqueKey"
       :schema="isFieldset ? innerFieldsetSchema : innerFormItemSchema"
@@ -304,7 +304,9 @@ export default {
 
     visible () {
       if (this.isFieldset) {
-        return true
+        return _isBoolean(this.innerFieldsetSchema.visible)
+          ? this.innerFieldsetSchema.visible
+          : true
       } else {
         return _isBoolean(this.innerFormItemSchema.visible)
           ? this.innerFormItemSchema.visible
