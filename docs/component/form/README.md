@@ -52,13 +52,64 @@ model 与 layout 同理。
 | 事件名          | 说明                     | 回调函数参数                                                |
 | --------------- | ------------------------ | ------------------------------------------------------- |
 | validate        | 同 el-form               | 同 el-form                                              |
-| change          | 任一表单项的值变化后触发 | 表单项 prop 值，表单项新值                              |
+| change          | 任一表单项的值变化后触发 | 表单项 prop 值，表单项新值 ({prop, value, formItem, model})                              |
 | submit          | 点击 submit button 且表单校验通过时触发 | -                              |
 | cancel          | 点击 cancel button 时触发 | -                              |
 | add       | 添加控件（控件组）       | 当前控件（控件组）父级的 schema                         |
 | remove    | 删除控件（控件组）       | 当前控件（控件组）父级的 schema，当前控件（控件组）索引 |
 | move-up   | 往上移动控件（控件组）   | 当前控件（控件组）父级的 schema，当前控件（控件组）索引 |
 | move-down | 往下移动控件（控件组）   | 当前控件（控件组）父级的 schema，当前控件（控件组）索引 |
+
+使用示例
+
+```vue
+<template>
+  <el-schema-form
+    ref="form"
+    :model="model"
+    :config="formConfig"
+    :layout="layout"
+    :schema="uiSchema"
+    :submit-button="true"
+    :cancel-button="true"
+    @add="handleAddField"
+    @remove="handleRemoveField"
+    @validate="handleValidate"
+    @change="handleChange"
+    @move-down="handelMoveDown"
+    @move-up="handelMoveUp"
+  >
+  </el-schema-form>
+</template>
+
+<script>
+export default {
+  methods: {
+    handleValidate(prop, isPass, validateMessage) {
+      console.log("validate", prop, isPass, validateMessage);
+    },
+
+    handleChange({ prop, value, formItem, model }) {
+      console.log(prop, value);
+    },
+
+    handleAddField(schema) {
+      this.model.hobby.push("");
+      this.$refs.form.updateSchema();
+    },
+
+    handleRemoveField(parentSchema, currentIndex) {
+      this.model.hobby.splice(currentIndex, 1);
+      this.$refs.form.updateSchema();
+    },
+
+    handleMoveUp(parentSchema, index) {},
+
+    handleMoveDown(parentSchema, index) {},
+  },
+};
+</script>
+```
 
 ## Form Methods
 
@@ -68,7 +119,7 @@ model 与 layout 同理。
 | validateField | 同 el-form                                                   | 同 el-form                      |
 | resetFields   | 同 el-form                                                   | 同 el-form                      |
 | clearValidate | 同 el-form                                                   | 同 el-form                      |
-| updateSchema  | 更新表单 schema，可传入两个可选参数，第一个参数是 schema，第二个参数是 model | Function(?schema:{}, ?model:{}) |
+| updateSchema  | 更新表单 schema，可传入两个可选参数，第一个参数是 schema，第二个参数是 model | Function(?schema:{}, ?model:{})，如果没有传值，将使用表单默认的 schema 与 model |
 
 ## Form Slots
 

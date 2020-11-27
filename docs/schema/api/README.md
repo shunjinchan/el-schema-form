@@ -8,16 +8,156 @@ Form-Item 基于 Element 的 el-form-item 进行扩展，支持配置 Form-Item 
 
 | 参数        | 说明                                 | 类型            | 可选值                                                       | 是否必传 | 默认值 |
 | ----------- | ------------------------------------ | --------------- | ------------------------------------------------------------ | -------- | ------ |
-| title/label | 标题，对应 el-form-item 的 lable     | string/动态组件 | -                                                            | 否       | -      |
+| title/label | 标题，对应 el-form-item 的 label     | string/动态组件 | -                                                            | 否       | -      |
+| visible         | 是否展示该控件组     | boolean                 | true/false    | 否       | true |
 | head        | Form-Item 头部                       | string/动态组件 | -                                                            | 否       | -      |
 | tail        | Form-Item 尾部                       | string/动态组件 | -                                                            | 否       | -      |
 | component   | 组件类型                             | string/动态组件 | input/input-number/autocomplete/checkbox/switch/rate/color-picker/slider/cascader/time-picker/time-select/date-picker/plain-text/link/upload/radio-group/checkbox-group/select | 是       | -      |
+| component   | 组件类型                             | 动态组件 | Vue 组件对象 | 否       | -      |
 | field       | element 控件配置，不同的控件值不一样 | Object          | -                                                            | 否       | -      |
-| rules       | 对应 el-form-form 的 rules           | Obejct          | -                                                            | 否       | -      |
+| rules       | 对应 el-form-form 的 rules           | Object          | -                                                            | 否       | -      |
 | ...         | 其他 el-form-item 的参数             |                 |                                                              |          |        |
 
 
 除 title 外，其他属性都是扩展的 JSON Schema 属性。
+
+### component 动态组件示例
+
+动态组件使用示例
+
+```vue
+<template>
+  <el-select
+    v-bind="config.field"
+    v-on="$listeners"
+    v-model="model[config.prop]"
+    @change="handleChange"
+  >
+    <el-option
+      v-for="opt in config.field.options"
+      :key="opt.value"
+      v-bind="opt"
+    ></el-option>
+  </el-select>
+</template>
+
+<script>
+export default {
+  props: {
+    config: {
+      type: Object,
+      required: true
+    },
+    model: {
+      type: Object,
+      required: true
+    }
+  },
+
+  mounted () {
+    console.log(this.config)
+    console.log(this.model)
+    console.log(this.$listeners)
+  },
+
+  methods: {
+    handleChange (val) {
+      // 动态组件数据变更后要更新
+      this.$emit('update-field', { prop: this.config.prop, value: val })
+    }
+  }
+}
+</script>
+```
+
+```javascript
+{
+  label: '动态表单控件示例',
+  component: DynamicFormItemField,
+  rules: [{ required: true, message: '请选择动态组件' }],
+  field: {
+    options: [
+      {
+        value: 1,
+        label: '选项一'
+      },
+      {
+        value: 2,
+        label: '选项二'
+      }
+    ]
+  }
+}
+```
+
+数据变更时，需要向上派发一个 update-field 事件，以此来触发 el-schema-form 事件的 change 事件。格式如下：
+
+```javascript
+this.$emit('update-field', { prop: this.config.prop, value: val })
+```
+prop 是当前控件对应的 key 值，value 要更新的值。
+
+### formItemComponent 示例
+
+```vue
+<template>
+  <el-form-item prop="dynamic_component2" label="动态 form item">
+    <el-button @click="handleClick">哈哈哈</el-button>
+  </el-form-item>
+</template>
+
+<script>
+export default {
+  props: {
+    config: {
+      type: Object,
+      required: true
+    },
+    model: {
+      type: Object,
+      required: true
+    }
+  },
+
+  mounted () {
+    console.log(this.config)
+    console.log(this.model)
+    console.log(this.$listeners)
+  },
+
+  methods: {
+    handleClick () {
+      this.$emit('click', 'dynamic_component2 组件点击')
+    }
+  }
+}
+</script>
+```
+
+在 schema 中的配置示例
+
+```javascript
+{
+  label: '动态表单控件示例',
+  rules: [{ required: true, message: '请选择动态组件' }],
+  formItemComponent: DynamicFormItem,
+  listeners: {
+    click: (val) => {
+      console.log(val)
+    }
+  }
+}
+```
+
+formItemComponent 动态组件派发的事件交由 listeners 捕获，如以上代码示例。
+
+数据变更时，需要向上派发一个 update-field 事件，以此来触发 el-schema-form 事件的 change 事件。格式如下：
+
+```javascript
+this.$emit('update-field', { prop: this.config.prop, value: val })
+```
+prop 是当前控件对应的 key 值，value 要更新的值。
+
 
 ## Field
 
@@ -116,6 +256,7 @@ Schema 的 type 是 object 或 array，El Schema Form 将其渲染为一个 fiel
 | --------------- | -------------------- | ----------------------- | ------ | -------- | ------ |
 | type            | 类型                 | String                  | array  | 是       | array  |
 | title           | 控件组标题           | String/动态组件         | -      | 否       | -      |
+| visible         | 是否展示该控件组     | boolean                 | true/false    | 否       | true |
 | description     | 控件组描述           | String/动态组件         | -      | 否       | -      |
 | addable         | 控件组是否可新增子项 | Boolean/Object/Function | -      | 否       | false  |
 | removable       | 控件组子项是否可删除 | Boolean/Object/Function | -      | 否       | false  |

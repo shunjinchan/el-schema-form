@@ -57,10 +57,10 @@
 </template>
 
 <script>
-import _cloneDeep from 'lodash/cloneDeep'
 // import ElSchemaForm from '../../package/Form.vue'
 // import { ElSchemaForm } from '../../dist/el-schema-form.common.js'
 // import '../../dist/el-schema-form.css'
+import DynamicFormItemField from './DynamicFormItemField.vue'
 import DynamicFormItem from './DynamicFormItem.vue'
 // import './i18n.js'
 import jsonSchema from '../json/common-form-schema.json'
@@ -133,7 +133,7 @@ const user = {
           placeholder: '请填写兴趣爱好'
         },
         rules: [{ required: true }],
-        default: ''
+        default: 'ddd2'
       }
     },
     family: {
@@ -262,7 +262,7 @@ export default {
         dynamic_component: '',
         dynamic_component2: '',
         image: '',
-        hobby: ['打篮球'],
+        hobby: ['打篮球222'],
         // hobby: ['打篮球', '看动画片', '看沙雕视频', '瞎折腾'],
         color: '#000000',
 
@@ -381,6 +381,7 @@ export default {
 
           organizer: {
             component: 'autocomplete',
+            visible: this.model.name === 'name',
             label: '活动举办方',
             rules: [{ required: true, message: '活动举办方不能为空' }],
             field: {
@@ -498,44 +499,37 @@ export default {
             label: '文本示例'
           },
 
-          // dynamic_component: {
-          //   label: '动态组件示例',
-          //   component: DynamicFormItem,
-          //   rules: [{ required: true, message: '请选择动态组件' }],
-          //   field: {
-          //     options: [
-          //       {
-          //         value: 1,
-          //         label: '选项一'
-          //       },
-          //       {
-          //         value: 2,
-          //         label: '选项二'
-          //       }
-          //     ]
-          //   }
-          // },
+          dynamic_component: {
+            label: '动态表单控件示例',
+            component: DynamicFormItemField,
+            rules: [{ required: true, message: '请选择动态组件' }],
+            field: {
+              options: [
+                {
+                  value: 1,
+                  label: '选项一'
+                },
+                {
+                  value: 2,
+                  label: '选项二'
+                }
+              ]
+            }
+          },
 
-          // dynamic_component2: {
-          //   functional: true,
-          //   render: (h, context) => {
-          //     console.log(context.props)
-          //     return (
-          //       <el-form-item
-          //         rules={[{ required: true, trigger: 'blur' }]}
-          //         prop="dynamic_component2"
-          //         label="动态组件2"
-          //       >
-          //         <el-input
-          //           value={context.props.model.dynamic_component2}
-          //           onInput={val => {
-          //             this.model.dynamic_component2 = val
-          //           }}
-          //         ></el-input>
-          //       </el-form-item>
-          //     )
-          //   }
-          // },
+          dynamic_component2: {
+            label: '动态表单控件示例',
+            rules: [{ required: true, message: '请选择动态组件' }],
+            formItemComponent: DynamicFormItem,
+            listeners: {
+              click: (val) => {
+                console.log('click', val)
+              },
+              updateField: () => {
+                console.log('updateField')
+              }
+            }
+          },
 
           image: {
             label: '上传图片',
@@ -630,7 +624,7 @@ export default {
                 placeholder: '请填写兴趣爱好'
               },
               rules: [{ required: true }],
-              default: ''
+              default: 'ddd'
               // head: {
               //   functional: true,
               //   render: (h, context) => {
@@ -651,6 +645,7 @@ export default {
           users: {
             type: 'array',
             title: '用户信息列表',
+            visible: true,
             description: '请填写真实信息',
             addable: {
               text: '新增用户',
@@ -738,11 +733,11 @@ export default {
 
   methods: {
     handleValidate (prop, isPass, validateMessage) {
-      // console.log('validate', prop, isPass, validateMessage)
+      console.log('validate', prop, isPass, validateMessage)
     },
 
-    handleChange ({ prop, value }) {
-      console.log(prop, value)
+    handleChange ({ prop, value, formItem, model }) {
+      console.log(prop, value, formItem, model)
     },
 
     handleAddField (schema) {
@@ -754,6 +749,10 @@ export default {
       this.model.hobby.splice(currentIndex, 1)
       this.$refs.form.updateSchema()
     },
+
+    handleMoveUp (parentSchema, index) {},
+
+    handleMoveDown (parentSchema, index) {},
 
     submit () {
       // this.$refs.form

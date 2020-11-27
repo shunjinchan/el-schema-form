@@ -14,6 +14,7 @@ footer: MIT Licensed | Copyright © 2020-present M
 ## 安装
 
 ```shell
+yarn add git@github.com:shunjinchan/el-schema-form.git
 ```
 
 ### 引入 el-schema-form

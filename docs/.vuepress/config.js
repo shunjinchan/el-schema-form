@@ -6,8 +6,7 @@ module.exports = {
       { text: '指南', link: '/guide/' },
       { text: '组件', link: '/component/form/' },
       { text: 'Schema', link: '/schema/form-schema/' },
-      { text: '场景案例', link: '/demo/simple/' },
-      { text: 'Github', link: '' }
+      { text: '场景案例', link: '/demo/simple/' }
     ],
 
     sidebar: [

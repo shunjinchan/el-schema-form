@@ -41,13 +41,13 @@
     <el-upload v-else-if="formItemConfig.component === 'upload'" v-bind="field">
       <template v-if="field.drag">
         <i class="el-icon-upload"></i>
-        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+        <div class="el-upload__text">{{ field.dragTip }}</div>
       </template>
       <template v-else-if="field.listType === 'picture-card'">
         <i class="el-icon-plus"></i>
       </template>
       <template v-else>
-        <el-button size="small" type="primary">点击上传</el-button>
+        <el-button size="small" type="primary">{{ field.clickTip }}</el-button>
       </template>
       <div class="el-upload__tip" slot="tip">
         {{ field.tip }}

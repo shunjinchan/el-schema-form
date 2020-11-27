@@ -11,9 +11,6 @@
       <el-tab-pane label="综合表单">
         <common-form></common-form>
       </el-tab-pane>
-      <!-- <el-tab-pane label="布局">
-        <dynamic-form></dynamic-form>
-      </el-tab-pane> -->
     </el-tabs>
   </div>
 </template>
@@ -21,12 +18,10 @@
 <script>
 import '../style/doc.scss'
 import CommonForm from './CommonForm.vue'
-// import DynamicForm from './DynamicForm.vue'
 
 export default {
   components: {
     CommonForm
-    // DynamicForm
   },
 
   data () {

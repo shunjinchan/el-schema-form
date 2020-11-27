@@ -1,15 +1,7 @@
 <template>
-  <el-select
-    v-bind="config.field"
-    v-on="$listeners"
-    v-model="model[config.prop]"
-  >
-    <el-option
-      v-for="opt in config.field.options"
-      :key="opt.value"
-      v-bind="opt"
-    ></el-option>
-  </el-select>
+  <el-form-item prop="dynamic_component2" label="动态 form item">
+    <el-button @click="handleClick">哈哈哈</el-button>
+  </el-form-item>
 </template>
 
 <script>
@@ -27,7 +19,20 @@ export default {
 
   mounted () {
     console.log(this.config)
-    // console.log(this.$listeners)
+    console.log(this.model)
+    console.log(this.$listeners)
+  },
+
+  methods: {
+    handleClick () {
+      this.$emit('click', 'dynamic_component2 组件点击')
+      this.$emit('update-field', {
+        prop: this.config.prop,
+        value: 'jjjj',
+        formItem: this.config,
+        model: this.model
+      })
+    }
   }
 }
 </script>

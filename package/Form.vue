@@ -420,12 +420,12 @@ export default {
       }
     },
 
-    validateField (cb) {
-      return this.$refs.form.validateField(cb)
+    validateField (props, callback) {
+      return this.$refs.form.validateField(props, callback)
     },
 
-    clearValidate (cb) {
-      return this.$refs.form.clearValidate(cb)
+    clearValidate (props) {
+      return this.$refs.form.clearValidate(props)
     },
 
     resetFields () {

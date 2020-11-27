@@ -46,10 +46,23 @@
     </template>
     <template v-else-if="innerFormItemSchema && visible">
       <component
-        v-if="typeof innerFormItemSchema.render === 'function'"
-        :is="innerFormItemSchema"
-        :fieldset-schema="cloneDeep(parentSchema)"
+        v-if="
+          innerFormItemSchema.formItemComponent &&
+            typeof innerFormItemSchema.formItemComponent.render === 'function'
+        "
+        :is="innerFormItemSchema.formItemComponent"
         :index="uniqueKey"
+        :model="model"
+        :config="innerFormItemSchema"
+        v-on="innerFormItemSchema.listeners"
+        @update-field="
+          val =>
+            _handleUpdateField({
+              ...val,
+              formItem: schema,
+              model
+            })
+        "
       ></component>
       <el-form-item v-else v-bind="{ ...innerFormItemSchema }" ref="form-item">
         <template v-if="typeof label !== 'undefined'">
@@ -73,7 +86,14 @@
           :fieldset-config="parentSchema"
           :index="uniqueKey"
           v-on="innerFormItemSchema.field.listeners"
-          @update-field="val => $emit('update-field', val)"
+          @update-field="
+            val =>
+              _handleUpdateField({
+                ...val,
+                formItem: schema,
+                model
+              })
+          "
         ></field>
       </el-form-item>
     </template>
@@ -110,6 +130,7 @@ import _each from 'lodash/each'
 import _isBoolean from 'lodash/isBoolean'
 import _cloneDeep from 'lodash/cloneDeep'
 import _isPlainObject from 'lodash/isPlainObject'
+import _omit from 'lodash/omit'
 import validator from './validator/index.js'
 import Field from './Field.vue'
 import FormFieldset from './FormFieldset.vue'
@@ -445,6 +466,12 @@ export default {
   },
 
   methods: {
+    _omit,
+
+    _handleUpdateField (params) {
+      this.$emit('update-field', params)
+    },
+
     /**
      * 过滤空配置，添加默认 field 配置
      * @param {{type: string, items: []|{}, items: []|{}}} config
